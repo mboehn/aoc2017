@@ -6,7 +6,7 @@ import func
 
 
 # Input from A.
-INPUTFILE = './task02-a.input'
+INPUTFILE = './task02.input'
 
 
 def checkrow(row):

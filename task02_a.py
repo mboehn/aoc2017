@@ -5,7 +5,7 @@ import csv
 import func
 
 
-INPUTFILE = './task02-a.input'
+INPUTFILE = './task02.input'
 checksum = 0
 
 with open(INPUTFILE, mode='r') as csvfile:
