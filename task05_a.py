@@ -15,7 +15,6 @@ INPUTFILE = './task05.input'
 def main():
     with open(file=INPUTFILE, mode='r') as fileinput:
 
-        
         lines = list(map(int, fileinput.readlines()))
         instructions = lines
 
@@ -46,10 +45,6 @@ def main():
                 log['parse'] = 'above'
                 next_instruction = next_instruction + current_instruction
 
-            
-
-#            if steps > 100:
-#                break  
             steps += 1
 
             print(
