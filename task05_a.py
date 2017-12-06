@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import sys
 import math
 import csv
 import itertools
@@ -60,10 +61,9 @@ def main():
                     log['new_value']
                 )
             )
-            
-
-
 
 
 if __name__ == '__main__':
+    if len(sys.argv) == 2:
+        INPUTFILE = sys.argv[1]
     main()
