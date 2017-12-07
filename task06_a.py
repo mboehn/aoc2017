@@ -13,65 +13,32 @@ import func
 INPUTFILE = './task06.input'
 
 
-def find_max(banks):
-
-    max_value = 0
-    max_index = []
-
-    for index, value in enumerate(banks):
-        if value > max_value:
-            max_index = [index, ]
-            max_value = value
-        elif value == max_value:
-            max_index.append(index)
-
-    max_index = max(max_index)
-
-    print("largest index: {}\t|\tlargest value: {}".format(max_index, max_value))
-    return max_value, max_index
-
-
 def loop_banks(banks):
-    print("starting loop")
-    states = []
     steps = 0
+    states = {}
 
-    while True:
+    # note to self. skjønne https://stackoverflow.com/questions/626759/whats-the-difference-between-lists-and-tuples
+    # jeg prøvde på samme varianten istad, men av en eller annen grunn så fikk jeg det ikke til med lister
+    while tuple(banks) not in states:
+        states[tuple(banks)] = steps
+        index, value = max(
+            enumerate(banks),
+            key=lambda k: (k[1], -k[0])
+        )
+        banks[index] = 0
 
-        if states.count(banks) > 0:
-            print("whaaaat.")
-            print(banks)
-            break
-
+        for loopindex in itertools.islice(
+                itertools.cycle(range(
+                    len(banks)
+                    )),
+                index + 1,
+                index + value + 1):
+            banks[loopindex] += 1
         steps += 1
-        print("-----------")
-        states.append(list(banks))
-        max_value, max_index = find_max(banks)
 
-        next_index = max_index + 1
-        if next_index > len(banks):
-            next_index = 0
-        print("next index: {}".format(next_index))
-
-        distribution_value = max_value / len(banks)
-        distribution_value_self = math.ceil(distribution_value)
-        if distribution_value % len(banks):
-            distribution_value_self = math.floor(distribution_value)
-        distribution_value = math.ceil(distribution_value)
-        print("bank {} will be: {}".format(max_index, distribution_value_self))
-        print("all other banks get {} added".format(distribution_value))
-
-        for bi, bv in enumerate(banks):
-            if bi != max_index:
-                banks[bi] += distribution_value
-            else:
-                banks[bi] = distribution_value_self
-
-
-        pprint(states)
-    print()
-
-    return(steps)
+    # print tar lang tid
+#    pprint(states)
+    return steps
 
 
 def main():
@@ -82,8 +49,6 @@ def main():
         print()
         steps = loop_banks(banks)
         print("this took... {} steps...".format(steps))
-        
-        
 
 
 if __name__ == '__main__':
