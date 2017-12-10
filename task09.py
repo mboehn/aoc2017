@@ -19,6 +19,7 @@ def main():
 
         index = 0
         garbage = False
+        gscore = 0
         storage = []
         score_total = 0
         score = 0
@@ -31,6 +32,8 @@ def main():
             elif garbage:
                 if line[index] == '>':
                     garbage = False
+                else:
+                    gscore += 1
             elif line[index] == '{':
                 score += 1
                 storage.append(score)
@@ -41,6 +44,7 @@ def main():
                 score_total += storage.pop()
             index += 1
         print("part 1: {}".format(score_total))
+        print("part 2: {}".format(gscore))
 
 
 if __name__ == '__main__':
