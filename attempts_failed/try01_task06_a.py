@@ -10,7 +10,7 @@ import operator
 import func
 
 
-INPUTFILE = './task06.input'
+INPUTFILE = '../task06.input'
 
 
 def find_max(banks):
